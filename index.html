@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Luminance">
+    <meta name="author" content="">
+
+    <title>Luminance</title>
+
+    <!-- Bootstrap Core CSS - Uses Bootswatch Flatly Theme: http://bootswatch.com/flatly/ -->
+    <!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
+
+    <!-- Custom CSS -->
+    <!-- <link href="css/freelancer.css" rel="stylesheet"> -->
+
+    <!-- Custom Fonts -->
+    <!-- <link href="font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+	<style>
+		body {
+			/*background-color: linen;*/
+		}
+		/*label:nth-child(1), #red {*/
+		label:nth-of-type(1), /*#red*/ input[id^="red"] {
+			color: red;
+			background-color: GreenYellow ;
+			/*margin-left: 40px;*/
+		} 
+		/*#page-top > div > form > label:nth-child(4)*/
+		label:nth-of-type(2), #green, /*#greenValue*//*[id|=greenValue]*/span[id^="greenValue"] {
+			color: green;
+			background-color: Aquamarine;/*127,255,212*/
+		} 
+		/*#page-top > div > form > label:nth-child(7)*/
+		label:nth-of-type(3), #blue, /*#blueValue*/span[id^="blueValue"] {
+				color: blue;
+		} 
+		output {
+			color: Aqua;
+			background-color: DarkBlue;/*0,0,139*/
+		} 
+		span.color {
+			/*width:10px;*/
+			min-width:50%;
+			max-width: 50%;/*in percent of the containing block*/
+			/*width: 1em;*/
+			background-color: Chartreuse;
+			/*float: left;*/
+			/*float: right;*/
+			/*clear: both;*/
+			position: relative;
+			left: 2rem;
+			z-index: 1;
+		}
+		div.color {
+			/*width:10px;*/
+			/*min-width:15%;
+			max-width: 25%;*//*in percent of the containing block*/
+			/*width: 1rem;*/
+			width: 3rem;
+			background-color: Aquamarine;
+			/*float: left;*/
+			float: right;
+			display: inline;
+		}
+		p.color {
+			min-width:25%;
+			max-width: 50%;/*in percent of the containing block*/
+			background-color: Aqua;
+		}
+		</style>
+</head>
+
+<body id="page-top" 
+				onload="rangeInputValue()"
+class="index">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top"></nav>
+		
+		<div class="container">
+			<form id="firstForm" action="" method="get" 
+			oninput="/*changeFormValues()*/
+			/*blueValue.value = parseInt(blue.value);
+			blueValue2.value = parseInt(blue2.value);*/			
+			/*colorPicker.value = '#' + toHex(red.value) + toHex(green.value) + toHex(blue.value);
+			colorPickerValue.value = '#' + toHex(red.value) + toHex(green.value) + toHex(blue.value);
+			*/
+			color2Picker.value = '#' + toHex(red2.value) + toHex(green2.value) + toHex(blue2.value);
+			color2PickerValue.value = '#' + toHex(red2.value) + toHex(green2.value) + toHex(blue2.value);
+			"
+			>
+			  <fieldset name='Color1'>
+					<legend>Color1:</legend>
+					<label for="red">Red value (between 1 and 255):</label>
+					<input id="red" type="number" name="red" value="125" min="1" max="255" step="1">
+					<!-- #FF00FF	rgb(255,0,255) -->
+					<input id="colorPicker" 
+					type="color" name="colorPicker" 
+					value="#DC143C"
+					onchange="colorPickerChanges(/*this.value*/colorPicker.value)" 
+					>
+					<output name="colorPickerValue" for="colorPicker" 
+					id='colorPickerValue' 
+					>hex color1</output>
+					<span class="color">&nbsp;</span>
+					<div class="color">&nbsp;</div>
+					<!-- <p class="color">&nbsp;</p> -->
+					<br>
+					<label for="green">Green value (between 1 and 255):</label> 
+					<input id="green" type="range" name="green" value="125" title="this.value" 
+					onchange="/*rangeInputValue('greenValue', this.value)*/" 
+					oninput="rangeInputValue('greenValue', this.value)"
+					min="1" max="255" step="1">
+					<span id="greenValue">127</span>
+					<br>
+					<label for="blue">Blue value (between 1 and 255):</label> 
+					<input id="blue" type="range" name="blue" value="125" 
+					onchange="rangeInputValue('blueValue', this.value)" 
+					min="1" max="255" step="1">
+					<span id="blueValue">124</span>
+					<output name="blueValue" for="blue"></output>
+					<br>
+				</fieldset>		
+				
+				<fieldset name='Color2'>
+					<legend>Color2:</legend>
+					<label for="red2">Red value (between 1 and 255):</label>
+					<input id="red2" type="number" name="red2" value="125" min="1" max="255" step="1">
+					<input id="color2Picker" type="color" name="color2Picker" 
+					value="#8A2BE2"
+					>										
+					<output name="color2PickerValue" for="color2Picker">hex color2</output>
+					<br>
+					<label for="green2">Green value (between 1 and 255):</label> 
+					<input id="green2" type="range" name="green2" value="125" title="this.value" 
+					onchange="/*rangeInputValue('greenValue2', this.value)*/" 
+					oninput="rangeInputValue('greenValue2', this.value)" 
+					min="1" max="255" step="1">
+					<span id="greenValue2">127</span>
+					<br>
+					<label for="blue2">Blue value (between 1 and 255):</label> 
+					<input id="blue2" type="range" name="blue2" value="125" 
+					onchange="/*rangeInputValue('blueValue2', this.value)*/" 
+					oninput="rangeInputValue('blueValue2', this.value)" 
+					min="1" max="255" step="1">
+					<span id="blueValue2">124</span>
+					<output name="blueValue2" for="blue"></output>
+					<br>
+				</fieldset>
+				<input title="Compare both colors" 
+				type="button" value="Compare" 
+				name="compare"				
+				onclick="compareColors([red.value, green.value, blue.value, 
+				red2.value, green2.value, blue2.value]);">
+				<input type="submit" value="Submit">
+				<br>
+				<output id='compareResult' name="compareResult" for="compare"></output>
+				<br>
+			</form>
+			OutPut ?
+    </div>
+
+    <!-- jQuery -->
+    <!-- <script src="js/jquery.js"></script> -->
+
+    <!-- Bootstrap Core JavaScript -->
+    <!-- <script src="js/bootstrap.min.js"></script> -->
+
+    <!-- Plugin JavaScript -->
+    <!-- <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script src="js/classie.js"></script>
+    <script src="js/cbpAnimatedHeader.js"></script> -->
+
+    <!-- Contact Form JavaScript -->
+    <!-- <script src="js/jqBootstrapValidation.js"></script>
+    <script src="js/contact_me.js"></script> -->
+
+    <!-- Custom Theme JavaScript -->
+    <!-- <script src="js/freelancer.js"></script> -->
+		
+	<script src="Luminance.js"></script>				
+	
+	<script>
+		/** from http://en.wikipedia.org/wiki/Hexadecimal
+		Division-remainder in source base 
+		JavaScript implementation
+		**/
+		function toHex(d) {
+			var r = d % 16/*,
+				result*/;
+				
+			if (d - r == 0) { 
+				//*result = toChar(r);
+				return toChar(r);
+			} else {
+				//*Recursion 
+				//*may cause: Uncaught RangeError: Maximum call stack size exceeded 				
+				//*result = toHex((d - r) / 16) + toChar(r);
+				return toHex((d - r) / 16) + toChar(r);
+			}
+			
+			//*return result;
+		}
+		
+		/** from http://en.wikipedia.org/wiki/Hexadecimal
+		Division-remainder in source base **/	
+		function toChar(n) {
+			const alpha = "0123456789ABCDEF";
+			
+			//*return alpha.charAt(n);
+			return alpha[n];
+		}
+	
+		function rangeInputValue(elemID, elemValue) {
+			//var x = document.getElementById("myScript").src;
+			//*document.getElementById("greenValue").innerHTML = document.getElementById("green").value;
+			//*var spanID = '';
+			
+			if (elemID) {
+			//if (elemID && elemID !='') {
+			/*if (elemID == 'red') {
+				spanID = 'redValue';
+				document.getElementById(spanID).innerHTML = elemValue;
+			}	*/		
+			/*if (elemID == 'green') {
+				spanID = 'greenValue';
+				document.getElementById(spanID).innerHTML = elemValue;
+			}	else	if (elemID == 'blue') {
+				spanID = 'blueValue';*/
+				document.getElementById(elemID).innerHTML = elemValue;
+				//*onclick="document.getElementById('id1').style.color = 'red'">
+			}
+		}
+		
+		function compareColors(RGB_array) {
+			//c1.colorValues();
+			c1.setColor(RGB_array[0], RGB_array[1], RGB_array[2]);
+			c2.setColor(RGB_array[3], RGB_array[4], RGB_array[5]);
+			//compareResult.value = 'compatible(c1, c2):' + lumi().compatible(c1, c2);
+			document.getElementById('compareResult').value = 'compatible(c1, c2): ' + 
+			lumi().compatible(c1, c2);
+			//return 'compatible(c1, c2):' + lumi().compatible(c1, c2);
+		}
+		
+		//*element must be loaded at this time
+		//*document.getElementById("fname").onchange = function() {changeFormValues()};
+		document.forms[0].onchange = function() {changeFormValues()};
+		//*document.forms.item(0); equivalent to document.forms[0]
+		//*document.forms.namedItem('firstForm');//*access by ID
+		//*document.getElementById("myForm").elements.namedItem("fname").value;//*by elem name
+		/*
+		document
+			.getElementById("myAnchor")
+				.addEventListener(
+					"click", 
+					function(event){
+						event.preventDefault()
+						alert("Was preventDefault() called: " + event.defaultPrevented);
+					}
+		); */
+		
+		function changeFormValues() {
+			//*Strange behavior:
+			//*if form oninput="changeFormValues()"	
+			//*instead of code literals - 'shortcuts' work only within DOM tags  
+			//*then	
+			//*Recursion of toHex() cause: Uncaught RangeError: Maximum call stack size exceeded
+			//*Reason - parameters for function -- undefined
+
+			//*document.forms.namedItem('firstForm').elements[1].name: "red"	
+			//*document.forms.namedItem('firstForm').elements[2].name: "colorPicker"
+			//*document.forms.namedItem('firstForm').elements[3].name: "colorPickerValue"
+			//*document.forms.namedItem('firstForm').elements[4].name: "green"
+			//*document.forms.namedItem('firstForm').elements[5].name: "blue"	
+			//*document.forms.namedItem('firstForm').elements.namedItem('blue')
+			
+			//*.elements: input, output, fieldset 
+			var formElems = document.forms[0].elements,//if success
+			hexColor;
+			//<span id="greenValue">127</span>	
+			
+			/*
+			blueValue.value = parseInt(blue.value);
+			blueValue2.value = parseInt(blue2.value);*/
+			formElems.namedItem('blueValue').value = parseInt(formElems.namedItem('blue').value);
+			formElems.namedItem('blueValue2').value = parseInt(formElems.namedItem('blue2').value);
+			
+			//*onclick="document.getElementById('id1').style.color = 'red'">
+			//*.getElementsByTagName('DIV').style.color = 'red';
+			for (var i = 0, elems = document.getElementsByClassName('color'); i <	elems.length; i++) {
+				if (elems[i].tagName == 'DIV' || elems[i].nodeName == 'DIV')	{
+					elems[i].style.backgroundColor = "rgb("
+					+ formElems.namedItem('red').value 
+					+ "," + formElems.namedItem('green').value 
+					+ "," + formElems.namedItem('blue').value + ")";
+					//*undefined, so not work
+					/*+ red.value 
+					+ "," + green.value 
+					+ "," + blue.value + ")";*/
+				}	
+			}
+			
+			/*
+			element.attribute=	Change the attribute of an HTML element
+			element.setAttribute(attribute,value) */
+			formElems
+				.namedItem('green')
+					.title = formElems
+						.namedItem('green')
+							.value;
+			formElems
+				.namedItem('blue')
+					.setAttribute(
+						'title', 
+						formElems
+							.namedItem('blue')
+								.value);
+
+			formElems
+				.namedItem('green2')
+					.title = formElems
+						.namedItem('green2')
+							.value;
+			formElems
+				.namedItem('blue2')
+					.setAttribute(
+						'title', 
+						formElems
+							.namedItem('blue2')
+								.value);
+			
+			//*number.toString(radix)			
+			hexColor = '#' 
+			+ parseInt(formElems.namedItem('red').value).toString(16)
+			+ parseInt(formElems.namedItem('green').value).toString(16)
+			+ parseInt(formElems.namedItem('blue').value).toString(16);
+			console.log("hexColor.toString(16): " + hexColor);
+			
+			hexColor = '#' 
+			+ toHex(formElems.namedItem('red').value)
+			+ toHex(formElems.namedItem('green').value)
+			+ toHex(formElems.namedItem('blue').value);
+			console.log("hexColor toHex(16): " + hexColor);
+			
+			formElems.namedItem('colorPicker').value = hexColor; 
+			formElems.namedItem('colorPickerValue').value = hexColor/*'#'
+			+ toHex(formElems.namedItem('red').value)
+			+ toHex(formElems.namedItem('green').value)
+			+ toHex(formElems.namedItem('blue').value)*/;
+			/*
+			colorPicker.value = '#' + toHex(red.value) + toHex(green.value) + toHex(blue.value);
+			colorPickerValue.value = '#' + toHex(red.value) + toHex(green.value) + toHex(blue.value);
+			
+			color2Picker.value = '#' + toHex(red2.value) + toHex(green2.value) + toHex(blue2.value);
+			color2PickerValue.value = '#' + toHex(red2.value) + toHex(green2.value) + toHex(blue2.value);
+			*/
+		
+		}
+		
+		function colorPickerChanges(hexColor) {
+			var formElems = document.forms[0].elements//,//if success
+			/*hexColor = formElems.namedItem('colorPicker').value*/;//*string ?
+			
+			formElems.namedItem('red').value = Number(hexColor.slice(1, 3));//*red //*slice(start, end)
+			formElems.namedItem('green').value = Number(hexColor.substr(3, 2));//*green
+			formElems.namedItem('blue').value = Number(hexColor.substr(5, 2));//*blue //*substr(start, length)
+		}
+	</script>
+</body>
+
+</html>
