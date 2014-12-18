@@ -144,6 +144,44 @@ var red = Color(255, 0, 0),
 green = Color(0, 255, 0), 
 blue = Color(0, 0, 255);
 
+/**
+* hex conversion to dec
+* by performing multiplication and addition to get the final representation.
+* from 'http://en.wikipedia.org/wiki/Hexadecimal'
+**/
+function hexToDec(hexNumb) {
+	var alphabet = {
+		0: 0,
+		1: 1,
+		2: 2,
+		3: 3,
+		4: 4,
+		5: 5,
+		6: 6,
+		7: 7,
+		8: 8,
+		9: 9,
+		A: 10,
+		B: 11,
+		C: 12,
+		D: 13,
+		E: 14,
+		F: 15
+	}, //*hex to dec mapping
+	decNumber = 0;//*empty value/string or 0 ?
+	
+	hexNumb = hexNumb.toString().toUpperCase();//*stringify 
+	for (var i = 0, hexLength = hexNumb.length; i < hexLength;i++) {
+	//for (var i = hexNumb.length - 1; i >= 0; i--) {
+		//*decNumber must be type number for proper addition 
+		decNumber += alphabet[hexNumb[i]] * Math.pow(16, hexLength - 1 - i); 
+	}
+	
+	return decNumber;
+}
+
+console.log(hexToDec("B3AD"));
+
 /*****************************************************************************/
 /** Examples **/
 /*****************************************************************************/
